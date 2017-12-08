@@ -45,7 +45,7 @@ class JarHelper {
             return false
         }
 
-        @JvmStatic fun loadJar(loader: ClassLoader?, jar: File?): Any? {
+        @JvmStatic fun loadJar(loader: ClassLoader?, jar: File?, superClassName: String?): Any? {
             try {
                 val classPath: String?
                 val classUrl: URL
@@ -76,7 +76,7 @@ class JarHelper {
                     throw InvalidJarLoadException("Cannot find main class " + classPath!!)
                 }
 
-                if (!classToLoad.superclass.simpleName.equals("BaseEventContainer", ignoreCase = true)) {
+                if (superClassName != null && !classToLoad.superclass.simpleName.equals("BaseEventContainer", ignoreCase = true)) {
                     throw InvalidJarLoadException("Wrong inheritance for " + classToLoad.simpleName)
                 }
 
