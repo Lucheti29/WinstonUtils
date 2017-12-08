@@ -1,0 +1,42 @@
+group 'com.github.luksdlt92.winstonutils'
+version '1.0'
+
+buildscript {
+    ext.kotlin_version = '1.2.0'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.github.typesafehub:config:v1.3.0'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Version': version,
+                'Main-Class': 'com.github.luksdlt92.winstonutils.WindstonUtils'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }}
+}
