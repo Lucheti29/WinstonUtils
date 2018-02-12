@@ -37,9 +37,8 @@ class JarHelper {
                     e.printStackTrace()
                 }
 
-            } catch (e: ResourcesLoadException) {
-                //LOGGER.log(Level.SEVERE, e.getMessage())
-                println("Something went wrong 1")
+            } catch (ex: ResourcesLoadException) {
+                println(ex.message)
             }
 
             return false
@@ -89,8 +88,7 @@ class JarHelper {
                 }
 
             } catch (ex: InvalidJarLoadException) {
-                //LOGGER.log(Level.SEVERE, ex.getMessage())
-                println("Something went wrong 2")
+                println(ex.message)
             }
 
             return null
