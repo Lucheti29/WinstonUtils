@@ -28,7 +28,7 @@ class JarHelper {
                 val existingFile = File(folderPath + fileName)
                 if (existingFile.exists()) return true
 
-                val inputStream = loader.getResourceAsStream(fileName) ?: throw ResourcesLoadException("The config.conf file for $fileName doesn't exist")
+                val inputStream = loader.getResourceAsStream(fileName) ?: throw ResourcesLoadException("The file $fileName doesn't exist")
 
                 try {
                     writeFile(inputStream, folderPath + fileName)
@@ -76,7 +76,7 @@ class JarHelper {
                     throw InvalidJarLoadException("Cannot find main class " + classPath!!)
                 }
 
-                if (superClassName != null && !classToLoad.superclass.simpleName.equals("BaseEventContainer", ignoreCase = true)) {
+                if (superClassName != null && !classToLoad.superclass.simpleName.equals(superClassName, ignoreCase = true)) {
                     throw InvalidJarLoadException("Wrong inheritance for " + classToLoad.simpleName)
                 }
 
