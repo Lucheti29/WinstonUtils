@@ -11,6 +11,7 @@ class GsonHelper {
         @JvmStatic fun load(file: File, obj: Any) : Any {
             val config = ConfigFactory.parseFile(file)
             val configJSON = config.root().render(ConfigRenderOptions.concise())
+            println(configJSON)
             return Gson().fromJson<Any>(configJSON, obj.javaClass)
         }
 
